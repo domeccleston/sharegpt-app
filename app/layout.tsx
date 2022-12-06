@@ -1,6 +1,7 @@
+"use client";
+
 import "../styles/globals.css";
 import "../styles/highlight.css";
-import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { Inter } from "@next/font/google";
@@ -16,13 +17,19 @@ const SFPro = localFont({
   variable: "--font-display",
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <main className={cx(inter.variable, SFPro.variable)}>
-      <Component {...pageProps} />
-      <Analytics />
-    </main>
+    <html lang="en">
+      <body className="bg-gray-50 dark:bg-[#343541]">
+        <main className={cx(inter.variable, SFPro.variable)}>
+          {children}
+          <Analytics />
+        </main>
+      </body>
+    </html>
   );
 }
-
-export default MyApp;

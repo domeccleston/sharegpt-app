@@ -1,7 +1,6 @@
-import { GetStaticPropsContext } from "next";
 import Image from "next/image";
+import { notFound } from "next/dist/client/components/not-found";
 
-import { ParsedUrlQuery } from "node:querystring";
 import { Redis } from "@upstash/redis";
 import cn from "classnames";
 
@@ -11,22 +10,32 @@ import styles from "@/styles/utils.module.css";
 import Banner from "@/components/banner";
 import Meta from "@/components/meta";
 
-interface ChatParams extends ParsedUrlQuery {
-  chat: string;
-}
-
 type ConversationItem = {
   from: "human" | "gpt";
   value: string;
 };
 
-export type ChatProps = {
-  chat: string;
+export type PageData = {
   avatarUrl: string;
   items: ConversationItem[];
 };
 
-export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
+const redis = Redis.fromEnv();
+
+async function getChatData(id: string): Promise<PageData> {
+  const page = (await redis.get(id)) as PageData;
+  if (!page) {
+    notFound();
+  }
+  return page;
+}
+
+export default async function ChatPage({
+  params: { chat },
+}: {
+  params: { chat: string };
+}) {
+  const { avatarUrl, items } = await getChatData(chat);
   return (
     <>
       <Meta
@@ -77,35 +86,7 @@ export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
   );
 }
 
-const redis = Redis.fromEnv();
+export async function generateStaticParams() {
+  return [{ chat: "z3ftry4pjp" }];
+}
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          chat: "z3ftry4pjp",
-        },
-      },
-    ],
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async (
-  context: GetStaticPropsContext & { params: ChatParams }
-) => {
-  const { chat } = context.params;
-
-  const page = await redis.get(chat);
-
-  if (page) {
-    return { props: { ...page, chat } };
-  } else {
-    return { notFound: true };
-  }
-};
-
-export const config = {
-  unstable_runtimeJS: false,
-};
