@@ -8,7 +8,7 @@ import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import Twitter from "@/components/twitter";
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
     <>
       <Meta />
@@ -193,6 +193,4 @@ const Home: NextPage = () => {
       </div>
     </>
   );
-};
-
-export default Home;
+}

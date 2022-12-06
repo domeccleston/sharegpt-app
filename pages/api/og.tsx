@@ -1,13 +1,20 @@
 import { ImageResponse } from "@vercel/og";
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from "next/server";
-import { ChatProps } from "../[chat]";
 import { convert } from "html-to-text";
 
 export const config = {
   runtime: "experimental-edge",
 };
 
+type ChatProps = {
+  chat: string;
+  avatarUrl: string;
+  items: Array<{
+    from: "human" | "gpt";
+    value: string;
+  }>;
+};
 
 const redis = Redis.fromEnv();
 
@@ -21,7 +28,6 @@ export default async function handler(req: NextRequest) {
   if (!page) {
     return NextResponse.redirect(new URL("/", req.url));
   }
-
 
   const { avatarUrl, items } = page;
   const firstUserMessage = items[0].value;
@@ -113,7 +119,7 @@ export default async function handler(req: NextRequest) {
     ),
     {
       width: 1200,
-      height: 600
+      height: 600,
     }
   );
 }

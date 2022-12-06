@@ -21,6 +21,7 @@ specifiers:
   nanoid: ^4.0.0
   next: 13.0.6
   postcss: ^8.4.19
+  ratelimit: link:@types/upstash/ratelimit
   react: 18.2.0
   react-dom: 18.2.0
   react-lite-youtube-embed: ^2.3.52
@@ -55,6 +56,7 @@ devDependencies:
   eslint: 8.29.0
   eslint-config-next: 13.0.6_s5ps7njkmjlaqajutnox5ntcla
   postcss: 8.4.19
+  ratelimit: link:@types/upstash/ratelimit
   tailwindcss: 3.2.4_postcss@8.4.19
   typescript: 4.9.3
 
