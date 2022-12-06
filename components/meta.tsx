@@ -58,5 +58,6 @@ export default function Meta({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta property="twitter:image:alt" content={imageAlt} />
-      </>
+    </>
+  );
 }
