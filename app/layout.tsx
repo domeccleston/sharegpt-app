@@ -1,8 +1,6 @@
-"use client";
-
 import "../styles/globals.css";
 import "../styles/highlight.css";
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { Inter } from "@next/font/google";
 import localFont from "@next/font/local";
@@ -27,7 +25,7 @@ export default function RootLayout({
       <body className="bg-gray-50 dark:bg-[#343541]">
         <main className={cx(inter.variable, SFPro.variable)}>
           {children}
-          <Analytics />
+          {/* <Analytics /> */}
         </main>
       </body>
     </html>
