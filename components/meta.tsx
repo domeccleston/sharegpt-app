@@ -13,7 +13,7 @@ export default function Meta({
   imageAlt?: string;
 }) {
   return (
-    <Head>
+    <>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link
@@ -58,6 +58,5 @@ export default function Meta({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta property="twitter:image:alt" content={imageAlt} />
-    </Head>
-  );
+      </>
 }
