@@ -8,7 +8,6 @@ import GPTAvatar from "@/components/GPTAvatar";
 
 import styles from "@/styles/utils.module.css";
 import Banner from "@/components/banner";
-import Meta from "@/components/meta";
 
 type ConversationItem = {
   from: "human" | "gpt";
@@ -38,11 +37,6 @@ export default async function ChatPage({
   const { avatarUrl, items } = await getChatData(chat);
   return (
     <>
-      <Meta
-        title={`Check out this ShareGPT conversation`}
-        image={`https://shareg.pt/api/og?chat=${chat}`}
-        imageAlt={`This is a preview image for a conversation betwen a human and a GPT-3 chatbot. The human first asks: ${items[0].value}. The GPT-3 chatbot then responds: ${items[1].value}`}
-      />
       <div className="flex flex-col items-center pb-24">
         {items.map((item) => (
           <div
