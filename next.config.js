@@ -8,6 +8,9 @@ const nextConfig = {
       "s.gravatar.com",
       "lh3.googleusercontent.com",
       "www.datocms-assets.com",
+      "avatars.dicebear.com",
+      "pbs.twimg.com",
+      "abs.twimg.com",
     ],
   },
   async headers() {

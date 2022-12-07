@@ -5,11 +5,11 @@ import { ParsedUrlQuery } from "node:querystring";
 import { Redis } from "@upstash/redis";
 import cn from "classnames";
 
-import GPTAvatar from "@/components/GPTAvatar";
+import GPTAvatar from "@/components/shared/icons/GPTAvatar";
 
 import styles from "@/styles/utils.module.css";
-import Banner from "@/components/banner";
-import Meta from "@/components/meta";
+import Banner from "@/components/layout/banner";
+import Meta from "@/components/layout/meta";
 
 interface ChatParams extends ParsedUrlQuery {
   chat: string;
