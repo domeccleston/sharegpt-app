@@ -44,6 +44,7 @@ export default function Modal({
     if (e.key === "Escape" && !closeWithX) {
       setShowModal(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
