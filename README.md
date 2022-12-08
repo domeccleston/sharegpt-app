@@ -1,3 +1,3 @@
-# ChatGPT Share
+# This repo has been moved:
 
-Frontend for ChatGPT Share. To start sharing ChatGPT conversations, visit https://github.com/domeccleston/chatgpt-extension and install the Chrome extension.
+Click [here](https://github.com/domeccleston/sharegpt) to browse the monorepo with code for ShareGPT.
