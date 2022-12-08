@@ -1,29 +1,37 @@
 import { GetStaticPropsContext } from "next";
 import Image from "next/image";
-import prisma from "@/lib/prisma";
+
 import { ParsedUrlQuery } from "node:querystring";
+import { Redis } from "@upstash/redis";
 import cn from "classnames";
-import GPTAvatar from "@/components/shared/icons/GPTAvatar";
+
+import GPTAvatar from "@/components/GPTAvatar";
+
 import styles from "@/styles/utils.module.css";
-import Banner from "@/components/layout/banner";
-import Meta from "@/components/layout/meta";
-import { ConversationProps } from "@/lib/types";
-import useView from "@/lib/hooks/use-view";
+import Banner from "@/components/banner";
+import Meta from "@/components/meta";
 
 interface ChatParams extends ParsedUrlQuery {
-  id: string;
+  chat: string;
 }
 
-export default function ChatPage({
-  id,
-  content: { avatarUrl, items },
-}: ConversationProps) {
-  useView();
+type ConversationItem = {
+  from: "human" | "gpt";
+  value: string;
+};
+
+export type ChatProps = {
+  chat: string;
+  avatarUrl: string;
+  items: ConversationItem[];
+};
+
+export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
   return (
     <>
       <Meta
         title={`Check out this ShareGPT conversation`}
-        image={`https://sharegpt.com/api/conversations/${id}/og`}
+        image={`https://shareg.pt/api/og?chat=${chat}`}
         imageAlt={`This is a preview image for a conversation betwen a human and a GPT-3 chatbot. The human first asks: ${items[0].value}. The GPT-3 chatbot then responds: ${items[1].value}`}
       />
       <div className="flex flex-col items-center pb-24">
@@ -69,22 +77,17 @@ export default function ChatPage({
   );
 }
 
+const redis = Redis.fromEnv();
+
 export const getStaticPaths = async () => {
-  const convos = await prisma.conversation.findMany({
-    select: {
-      id: true,
-    },
-    orderBy: {
-      views: "desc",
-    },
-    take: 100, // pregenerate the top 100 most viewed conversations
-  });
   return {
-    paths: convos.map((convo) => ({
-      params: {
-        id: convo.id,
+    paths: [
+      {
+        params: {
+          chat: "z3ftry4pjp",
+        },
       },
-    })),
+    ],
     fallback: "blocking",
   };
 };
@@ -92,20 +95,12 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (
   context: GetStaticPropsContext & { params: ChatParams }
 ) => {
-  const { id } = context.params;
+  const { chat } = context.params;
 
-  const props = await prisma.conversation.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      content: true,
-    },
-  });
+  const page = await redis.get(chat);
 
-  if (props) {
-    return { props };
+  if (page) {
+    return { props: { ...page, chat } };
   } else {
     return { notFound: true };
   }
