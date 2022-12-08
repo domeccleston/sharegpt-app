@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <UserDropdown />
             ) : (
               <button
-                className="bg-black text-white text-sm px-3 p-1 rounded-md border border-black hover:bg-white hover:text-black transition-all"
+                className="bg-black text-white text-sm px-4 p-1.5 rounded-md border border-black hover:bg-white hover:text-black transition-all"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In

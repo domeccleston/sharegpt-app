@@ -10,6 +10,7 @@ import {
 import LoadingDots from "@/components/shared/icons/loading-dots";
 import Link from "next/link";
 import Twitter from "../shared/icons/twitter";
+import Image from "next/image";
 
 const SignInModal = ({
   showSignInModal,
@@ -47,14 +48,40 @@ const SignInModal = ({
           </p>
         </div>
 
-        <div className="mt-5 flex flex-col space-y-4">
+        <div className="mt-5 flex flex-col space-y-2">
           <button
             disabled={signInClicked}
             className={`${
               signInClicked
                 ? "cursor-not-allowed bg-gray-100 border-gray-200"
-                : "bg-black hover:bg-white text-white hover:text-black border-black"
-            } flex justify-center items-center space-x-3 w-full text-sm h-10 rounded-md border transition-all focus:outline-none`}
+                : "bg-white text-black border border-gray-200 hover:bg-gray-50"
+            } flex justify-center items-center space-x-3 shadow-sm w-full text-sm h-10 rounded-md border transition-all duration-75 focus:outline-none`}
+            onClick={() => {
+              setSignInClicked(true);
+              signIn("google");
+            }}
+          >
+            {signInClicked ? (
+              <LoadingDots color="#808080" />
+            ) : (
+              <>
+                <Image
+                  alt="Chrome logo"
+                  src="/chrome.svg"
+                  width={20}
+                  height={20}
+                />
+                <p>Sign In with Google</p>
+              </>
+            )}
+          </button>
+          <button
+            disabled={signInClicked}
+            className={`${
+              signInClicked
+                ? "cursor-not-allowed bg-gray-100 border-gray-200"
+                : "bg-white text-black border border-gray-200 hover:bg-gray-50"
+            } flex justify-center items-center space-x-3 shadow-sm w-full text-sm h-10 rounded-md border transition-all duration-75 focus:outline-none`}
             onClick={() => {
               setSignInClicked(true);
               signIn("twitter");
@@ -64,7 +91,7 @@ const SignInModal = ({
               <LoadingDots color="#808080" />
             ) : (
               <>
-                <Twitter className="w-4 h-4" />
+                <Twitter className="text-[#1DA1F2] w-5 h-5" />
                 <p>Sign In with Twitter</p>
               </>
             )}

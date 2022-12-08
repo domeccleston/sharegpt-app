@@ -15,7 +15,6 @@ generator client {
 model User {
   id            String         @id @default(cuid())
   name          String?
-  twitter       String?        @unique
   username      String?        @unique
   email         String?        @unique
   emailVerified DateTime?
@@ -35,11 +34,11 @@ model Account {
   provider           String
   providerAccountId  String
   refresh_token      String?
-  access_token       String?
+  access_token       String? @db.Text
+  id_token           String? @db.Text
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
