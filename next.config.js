@@ -26,10 +26,6 @@ const nextConfig = {
             key: "X-DNS-Prefetch-Control",
             value: "on",
           },
-          {
-            key: "x-robots-tag",
-            value: "noindex",
-          },
         ],
       },
       {
@@ -72,6 +68,17 @@ const nextConfig = {
           },
         ],
         destination: "https://sharegpt.com",
+        permanent: false,
+      },
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "shareg.pt",
+          },
+        ],
+        destination: "https://sharegpt.com/c/:path*",
         permanent: false,
       },
       {
