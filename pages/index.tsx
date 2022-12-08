@@ -69,11 +69,16 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </div>
-        <div className="my-16 px-2 sm:px-0 sm:max-w-[800px] lg:max-w-[1000px] w-full">
-          <LiteYouTubeEmbed
+        <div className="my-16 h-[600px]px-2 sm:px-0 relative sm:max-w-[800px] lg:max-w-[1000px] w-full">
+          {/* <LiteYouTubeEmbed
             id="lrjC9PTemJw"
             poster="maxresdefault"
-            title="Whats new in Material Design for the web (Chrome Dev Summit 2019)"
+            title="ShareGPT: Easily share permanent links to your ChatGPT conversations"
+          /> */}
+          <img
+            src="/chatgpt.png"
+            alt="Video demo of ShareGPT"
+            className="rounded-lg shadow-2xl aspect-[16/9]"
           />
         </div>
         <div
