@@ -19,14 +19,6 @@ export default function Banner() {
         />
         <p>Shared via ShareGPT</p>
       </Link>
-      <Link
-        href="https://sharegpt.com/extension"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="p-2 rounded-md hover:bg-gray-100 active:bg-gray-200 transition-all"
-      >
-        <Image alt="Chrome logo" src="/chrome.svg" width={20} height={20} />
-      </Link>
     </div>
   );
 }

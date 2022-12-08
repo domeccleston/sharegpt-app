@@ -9,6 +9,7 @@ import GPTAvatar from "@/components/shared/icons/GPTAvatar";
 
 import styles from "@/styles/utils.module.css";
 import Banner from "@/components/layout/banner";
+import LikeButton from "@/components/layout/like-button";
 import Meta from "@/components/layout/meta";
 
 interface ChatParams extends ParsedUrlQuery {
@@ -23,10 +24,11 @@ type ConversationItem = {
 export type ChatProps = {
   chat: string;
   avatarUrl: string;
+  likes?: number;
   items: ConversationItem[];
 };
 
-export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
+export default function ChatPage({ chat, avatarUrl, items, likes }: ChatProps) {
   return (
     <>
       <Meta
@@ -73,6 +75,7 @@ export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
         ))}
       </div>
       <Banner />
+      <LikeButton likes={likes} chat={chat} />
     </>
   );
 }
