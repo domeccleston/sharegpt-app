@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Banner() {
+export default function Banner({ chat }: { chat: string }) {
   return (
     <div className="fixed bottom-5 inset-x-0 mx-auto max-w-fit rounded-lg p-2 bg-white border border-gray-100 shadow-md flex justify-between space-x-1 items-center">
       <Link
@@ -26,6 +26,17 @@ export default function Banner() {
         className="p-2 rounded-md hover:bg-gray-100 active:bg-gray-200 transition-all"
       >
         <Image alt="Chrome logo" src="/chrome.svg" width={20} height={20} />
+      </Link>
+
+      <Link
+        href={encodeURI(
+          `https://api.notion.com/v1/oauth/authorize?client_id=67b08973-1b43-445f-b2e9-55e309eba7b3&response_type=code&owner=user&state=${chat}`
+        )}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 rounded-md hover:bg-gray-100 active:bg-gray-200 transition-all"
+      >
+        Save to Notion
       </Link>
     </div>
   );

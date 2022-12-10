@@ -72,7 +72,7 @@ export default function ChatPage({ chat, avatarUrl, items }: ChatProps) {
           </div>
         ))}
       </div>
-      <Banner />
+      <Banner chat={chat} />
     </>
   );
 }
